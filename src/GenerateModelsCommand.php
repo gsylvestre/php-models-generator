@@ -42,8 +42,11 @@ class GenerateModelsCommand extends Command
             $tableInfos[] = new TableInfo($tableName);
         }
 
+        $configData = parse_ini_file('config.ini');
+        $namespace = empty($configData['MODEL_NAMESPACE']) ? null : $configData['MODEL_NAMESPACE'];
+
         foreach($tableInfos as $tableInfo){
-            $classGenerator = new ClassGenerator($tableInfo);
+            $classGenerator = new ClassGenerator($tableInfo, $namespace);
             $classGenerator->createFile();
         }
 
@@ -57,9 +60,10 @@ class GenerateModelsCommand extends Command
         $dbHost = $io->ask('Database host?', 'localhost');
         $dbUser = $io->ask('Database host?', 'root');
         $dbPass = $io->ask('Database password?', '');
+        $namespace = $io->ask('Namespace for models?');
 
         file_put_contents('config.ini', 
-            "DB_HOST=$dbHost\r\nDB_NAME=$dbName\r\nDB_USER=$dbUser\r\nDB_PASS=$dbPass"
+            "DB_HOST=$dbHost\r\nDB_NAME=$dbName\r\nDB_USER=$dbUser\r\nDB_PASS=$dbPass\r\nMODEL_NAMESPACE=$namespace"
         );
     }
 }

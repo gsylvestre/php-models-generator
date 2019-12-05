@@ -4,10 +4,12 @@ class ClassGenerator
 {
     /** @var TableInfo */
     private $tableInfo;
+    private $namespace;
 
-    public function __construct(TableInfo $tableInfo)
+    public function __construct(TableInfo $tableInfo, string $namespace = null)
     {
         $this->tableInfo = $tableInfo;
+        $this->namespace = $namespace;
     }
 
     public function createFile()

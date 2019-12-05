@@ -1,3 +1,7 @@
+<?php if(!empty($this->namespace)): ?>
+namespace <?= $this->namespace ?>;
+
+<?php endif; ?>
 class <?= $this->tableInfo->getClassName() ?>
 
 {
