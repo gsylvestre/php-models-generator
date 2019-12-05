@@ -3,11 +3,11 @@
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateModelsCommand extends Command
 {
-    protected static $defaultName = 'generate-models';
+    protected static $defaultName = 'models';
 
     protected function configure()
     {
@@ -16,20 +16,23 @@ class GenerateModelsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $helper = $this->getHelper('question');
+        $io = new SymfonyStyle($input, $output);
 
-        $question = new Question('Database name ? ');
-        $dbName = $helper->ask($input, $output, $question);
-
-        $question = new Question('Database host ? [localhost] ', 'localhost');
-        $dbHost = $helper->ask($input, $output, $question);
-
-        $question = new Question('Database user ? [root] ', 'root');
-        $dbUser = $helper->ask($input, $output, $question);
-
-        $question = new Question('Database password ? ', '');
-        $question->setHidden(true);
-        $dbPass = $helper->ask($input, $output, $question);
+        $databaseCheck = new DatabaseCheck();
+        try {
+            $databaseCheck->checkDatabaseConfig();
+        }
+        catch(Exception $e){
+            if($e->getMessage() === "database.connection.fail"){
+                $io->error("Can't connect to database! Check your config in config.ini!");
+                die();
+            }
+            else {
+                $this->generateConfigIni($io);
+                $this->execute($input, $output);
+                return 0;
+            }
+        }
 
         $generator = new ModelGenerator();
         
@@ -44,7 +47,19 @@ class GenerateModelsCommand extends Command
             $classGenerator->createFile();
         }
 
-        $output->writeln('Done! Your models are in the models/ folder.');
+        $io->success('Done! Your models are in the models/ folder.');
         return 0;
+    }
+
+    private function generateConfigIni($io)
+    {
+        $dbName = $io->ask('Database name?');
+        $dbHost = $io->ask('Database host?', 'localhost');
+        $dbUser = $io->ask('Database host?', 'root');
+        $dbPass = $io->ask('Database password?', '');
+
+        file_put_contents('config.ini', 
+            "DB_HOST=$dbHost\r\nDB_NAME=$dbName\r\nDB_USER=$dbUser\r\nDB_PASS=$dbPass"
+        );
     }
 }

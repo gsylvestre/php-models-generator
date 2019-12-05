@@ -2,16 +2,9 @@
 
 class ModelGenerator 
 {
-    private $pdo;
-
-    public function __construct($dbName, $dbHost, $dbUser, $dbPassword)
-    {
-        $this->pdo = Database::getPDO($dbName, $dbHost, $dbUser, $dbPassword);
-    }
-
     public function getTableNames()
     {
-        $stmt = $this->pdo->query('SHOW TABLES');
+        $stmt = Database::getPDO()->query('SHOW TABLES');
         $tablesRaw = $stmt->fetchAll();
 
         $tableNames = [];
@@ -24,7 +17,7 @@ class ModelGenerator
 
     public function getTableColumns($tableName)
     {
-        $stmt = $this->pdo->query('DESCRIBE ' . $tableName);
+        $stmt = Database::getPDO()->query('DESCRIBE ' . $tableName);
         $columnsRaw = $stmt->fetchAll();
 
         $columnNames = [];

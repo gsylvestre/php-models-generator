@@ -1,6 +1,6 @@
 class <?= $this->tableInfo->getClassName() ?>
-{
 
+{
 <?php foreach($this->tableInfo->getProperties() as $prop): ?>
     private $<?= $prop ?>;
 <?php endforeach; ?>
