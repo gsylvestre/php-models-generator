@@ -1,17 +1,20 @@
 # PHP models generator
 Generate painlessly PHP models/entities from existing database.
 
+## How to install
+Inside any project run:
+```
+composer require gsylvestre/php-models-generator --dev
+```
+
 ## How to use
-Clone this repo
+Execute:
 ```
-git clone https://github.com/gsylvestre/php-models-creator.git
+php vendor/gsylvestre/php-models-generator/generate models
 ```
-Move to repo directory
-```
-cd php-models-creator
-```
-Generate models (follow the wizard)
-```
-php generate models
-```
-Enjoy!
+and follow the wizard for setting up database connection... 
+
+*If you need to change database connection infos, edit the generated `config.ini` file.*
+
+
+Enjoy and big up to Y!
