@@ -26,7 +26,7 @@ class TableInfo
 
     public function generateClassNameFromTableName()
     {
-        $this->className = Inflector::classify($this->name);
+        $this->className = Inflector::singularize(Inflector::classify($this->name));
     }
 
     public function generatePropertiesFromColumns()
