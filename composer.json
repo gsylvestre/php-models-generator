@@ -1,7 +1,7 @@
 {
     "name": "gsylvestre/php-models-generator",
     "description": "Generate painlessly PHP models/entities from existing database",
-    "type": "library",
+    "type": "project",
     "license": "MIT",
     "authors": [
         {
