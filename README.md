@@ -1,5 +1,12 @@
 # PHP models generator
-Generate painlessly PHP models/entities from existing database.
+### Painlessly generates PHP models/entities from existing MySQL database!
+
+Run a simple command and you'll get: 
+- one pretty model class for each table in your db
+- automatic singular class names
+- automatic camelCasing
+- private props with lightweight getters and setters
+
 
 ## How to install
 In your web folder run:
@@ -8,7 +15,7 @@ composer create-project gsylvestre/php-models-generator
 ```
 
 ## How to use
-Inside the new directory, execute:
+Inside your new `php-models-generator` directory, execute:
 ```
 php generate models
 ```
