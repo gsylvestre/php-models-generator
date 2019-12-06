@@ -63,7 +63,7 @@ class GenerateModelsCommand extends Command
         $dbPass = $io->ask('Database password?', '');
         $namespace = $io->ask('Namespace for models?');
 
-        file_put_contents('config.ini', 
+        file_put_contents(__DIR__ . '/../config.ini', 
             "DB_HOST=$dbHost\r\nDB_NAME=$dbName\r\nDB_USER=$dbUser\r\nDB_PASS=$dbPass\r\nMODEL_NAMESPACE=$namespace"
         );
     }

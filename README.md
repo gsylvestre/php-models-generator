@@ -2,15 +2,15 @@
 Generate painlessly PHP models/entities from existing database.
 
 ## How to install
-Inside any project run:
+In your web folder run:
 ```
-composer require gsylvestre/php-models-generator --dev
+composer create-project gsylvestre/php-models-generator
 ```
 
 ## How to use
-Execute:
+Inside the new directory, execute:
 ```
-php vendor/gsylvestre/php-models-generator/generate models
+php generate models
 ```
 and follow the wizard for setting up database connection... 
 
