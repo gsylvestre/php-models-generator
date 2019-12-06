@@ -50,7 +50,8 @@ class GenerateModelsCommand extends Command
             $classGenerator->createFile();
         }
 
-        $io->success('Done! Your models are in the models/ folder.');
+        $io->success('Done! Your models are in the vendor/gsylvestre/php-model-generator/models/ folder.');
+        $io->text('Move them wherever you want!');
         return 0;
     }
 

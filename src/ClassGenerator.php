@@ -20,6 +20,6 @@ class ClassGenerator
         $content = '<?php' . "\r\n\r\n" . ob_get_contents();
         ob_end_clean();
 
-        file_put_contents("models/".$filename, $content);
+        file_put_contents(__DIR__ . "/../models/".$filename, $content);
     }
 }
